@@ -29,13 +29,13 @@ class LinkedList():
             self.head = n
             self.length += 1
             return 1
-        else:
-            current = self.head
-            while current.next is not None:
-                current = current.next
-            current.next = n
         
+        current = self.head
+        while current.next is not None:
+            current = current.next
+        current.next = n
         self.length += 1
+        
         return 1
     
     def remove(self, value):

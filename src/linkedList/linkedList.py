@@ -18,6 +18,9 @@ class LinkedList():
             c = c.next
         return " -> ".join(values)
 
+    def __len__(self):
+        return self.length
+
     def isEmpty(self):
         return self.length == 0
     
@@ -70,8 +73,52 @@ class LinkedList():
 
         return 0 
 
+    def insertAtIndex(self, value, index):
+        n = Node(value)
 
+        if 0 < index > self.length:
+            return -1
+
+        if self.isEmpty() and index == 0: # queremos que sea el primer elemento - head
+            self.head = n
+            self.length += 1
+            return 1
+        elif self.isEmpty():
+            return -1
+
+        prev = None
+        current = self.head
+        c = 0
         
+        while c != index:
+            prev = current
+            current = current.next
+            c += 1
+        
+        prev.next = n
+        n.next = current
+        return 1
+
+    def removeAtIndex(self, index):
+        if self.isEmpty():
+            return -1
+
+        if 0 < index > self.length:
+            return -1
+
+        prev = None
+        current = self.head
+        c = 0
+
+        while c != index:
+            prev = current
+            current = current.next
+            c += 1
+
+        prev.next = current.next
+        current.next = None
+        return 1
+
 ll = LinkedList()
 ll.insert(1)
 ll.insert(2)
@@ -79,5 +126,8 @@ ll.insert(3)
 ll.insert(4)
 ll.insert(5)
 ll.insert(6)
-
+print(ll)
+ll.insertAtIndex(7, 4)
+print(ll)
+ll.removeAtIndex(4)
 print(ll)
